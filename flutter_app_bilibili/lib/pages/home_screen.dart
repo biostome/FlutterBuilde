@@ -22,23 +22,12 @@ final SnackBar snackBar = const SnackBar(content: Text('Showing Snackbar'));
 void openPage(BuildContext context) {
   Navigator.push(context, MaterialPageRoute(
     builder: (BuildContext context) {
-//      return Scaffold(
-//        appBar: AppBar(
-//          title: const Text('Next page'),
-//        ),
-//        body: const Center(
-//          child: Text(
-//            'This is the next page',
-//            style: TextStyle(fontSize: 24),
-//          ),
-//        ),
-//      );
       return SecondPage();
     },
   ));
 }
 
-class SecondPage extends StatefulWidget{
+class SecondPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -63,9 +52,7 @@ class MySecondPageStatefulWidget extends State<SecondPage> {
       ),
     );
   }
-
 }
-
 
 class MyFulWidget extends StatefulWidget {
   @override
@@ -142,10 +129,7 @@ class MyFulStateWidget extends State<MyFulWidget> {
                     children: <Widget>[
                       Container(
                         height: 30,
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width / 6,
+                        width: MediaQuery.of(context).size.width / 6,
                         child: FlatButton(
                           onPressed: () {
                             setState(() {
@@ -168,10 +152,7 @@ class MyFulStateWidget extends State<MyFulWidget> {
                     children: <Widget>[
                       Container(
                         height: 30,
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width / 6,
+                        width: MediaQuery.of(context).size.width / 6,
                         child: FlatButton(
                           onPressed: () {
                             setState(() {
@@ -194,10 +175,7 @@ class MyFulStateWidget extends State<MyFulWidget> {
                     children: <Widget>[
                       Container(
                         height: 30,
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width / 6,
+                        width: MediaQuery.of(context).size.width / 6,
                         child: FlatButton(
                           onPressed: () {
                             setState(() {
@@ -220,10 +198,7 @@ class MyFulStateWidget extends State<MyFulWidget> {
                     children: <Widget>[
                       Container(
                         height: 30,
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width / 6,
+                        width: MediaQuery.of(context).size.width / 6,
                         child: FlatButton(
                           onPressed: () {
                             setState(() {
@@ -246,10 +221,7 @@ class MyFulStateWidget extends State<MyFulWidget> {
                     children: <Widget>[
                       Container(
                         height: 30,
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width / 6,
+                        width: MediaQuery.of(context).size.width / 6,
                         child: FlatButton(
                           onPressed: () {
                             setState(() {
@@ -341,7 +313,7 @@ class MyFulStateWidget extends State<MyFulWidget> {
                   ),
                   Flexible(
                     child:
-                    FlatButton(onPressed: () {}, child: Icon(Icons.search)),
+                        FlatButton(onPressed: () {}, child: Icon(Icons.search)),
                     flex: 2,
                   )
                 ],
@@ -372,10 +344,11 @@ class MyFulStateWidget extends State<MyFulWidget> {
                 itemCount: 4,
                 physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    mainAxisSpacing: 0,
-                    crossAxisSpacing: 0,
-                    crossAxisCount: 2,
-                    childAspectRatio: 1.25),
+                  mainAxisSpacing: 0,
+                  crossAxisSpacing: 0,
+                  crossAxisCount: 2,
+                  childAspectRatio: 1.25,
+                ),
                 itemBuilder: (context, index) {
                   return new Padding(
                     padding: EdgeInsets.only(left: 10, right: 10),
@@ -386,16 +359,14 @@ class MyFulStateWidget extends State<MyFulWidget> {
                             padding: EdgeInsets.all(0),
                             child: new ClipRRect(
                               borderRadius:
-                              BorderRadius.all(Radius.circular(10)),
+                                  BorderRadius.all(Radius.circular(10)),
                               child: Image.asset(
-                                'resource/images/nb.jpeg',
+//                                'resource/images/nb.jpeg',
+                                'resource/mipmap-hdpi-v4/ic_launcher.png',
                                 fit: BoxFit.cover,
                                 height: 100.0,
                                 width:
-                                (MediaQuery
-                                    .of(context)
-                                    .size
-                                    .width / 2.0),
+                                    (MediaQuery.of(context).size.width / 2.0),
                               ),
                             )),
                         Text('三局杀'),
