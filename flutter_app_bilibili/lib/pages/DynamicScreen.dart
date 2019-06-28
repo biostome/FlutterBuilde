@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class EmailScreen extends StatelessWidget {
+class DynamicScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build

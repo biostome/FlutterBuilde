@@ -1,4 +1,16 @@
 import 'package:flutter/material.dart';
+import 'vip_screen.dart';
+import 'package:flutter_app_2/pages/RegisterScreen.dart';
+
+class PagesModel {
+  final String title;
+  final Icon icon;
+
+  PagesModel({
+    this.title,
+    this.icon,
+  });
+}
 
 class PagesScreen extends StatefulWidget {
   @override
@@ -9,6 +21,174 @@ class PagesScreen extends StatefulWidget {
 }
 
 class PagesScreenState extends State<PagesScreen> {
+  List<PagesModel> _listCenter = List();
+  List<PagesModel> _myServer = List();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    _listCenter
+      ..add(
+        PagesModel(
+          title: '离线缓存',
+          icon: Icon(
+            Icons.work,
+            color: Colors.redAccent,
+            size: 30,
+          ),
+        ),
+      )
+      ..add(
+        PagesModel(
+          title: '历史记录',
+          icon: Icon(
+            Icons.email,
+            color: Colors.redAccent,
+            size: 30,
+          ),
+        ),
+      )
+      ..add(
+        PagesModel(
+          title: '我的收藏',
+          icon: Icon(
+            Icons.remove,
+            color: Colors.redAccent,
+            size: 30,
+          ),
+        ),
+      )
+      ..add(
+        PagesModel(
+          title: '我的关注',
+          icon: Icon(
+            Icons.title,
+            color: Colors.redAccent,
+            size: 30,
+          ),
+        ),
+      )
+      ..add(
+        PagesModel(
+          title: '稍后再看',
+          icon: Icon(
+            Icons.youtube_searched_for,
+            color: Colors.redAccent,
+            size: 30,
+          ),
+        ),
+      )
+      ..add(
+        PagesModel(
+          title: 'B币钱包',
+          icon: Icon(
+            Icons.unarchive,
+            color: Colors.redAccent,
+            size: 30,
+          ),
+        ),
+      )
+      ..add(
+        PagesModel(
+          title: '会员购中心',
+          icon: Icon(
+            Icons.image,
+            color: Colors.redAccent,
+            size: 30,
+          ),
+        ),
+      )
+      ..add(
+        PagesModel(
+          title: '直播中心',
+          icon: Icon(
+            Icons.offline_bolt,
+            color: Colors.redAccent,
+            size: 30,
+          ),
+        ),
+      );
+
+    _myServer
+      ..add(
+        PagesModel(
+          title: '青少年模式',
+          icon: Icon(
+            Icons.print,
+            color: Colors.blue,
+            size: 30,
+          ),
+        ),
+      )
+      ..add(
+        PagesModel(
+          title: '大会员',
+          icon: Icon(
+            Icons.account_box,
+            color: Colors.blue,
+            size: 30,
+          ),
+        ),
+      )
+      ..add(
+        PagesModel(
+          title: '看视频免流',
+          icon: Icon(
+            Icons.score,
+            color: Colors.blue,
+            size: 30,
+          ),
+        ),
+      )
+      ..add(
+        PagesModel(
+          title: '创作学院',
+          icon: Icon(
+            Icons.dashboard,
+            color: Colors.blue,
+            size: 30,
+          ),
+        ),
+      )
+      ..add(
+        PagesModel(
+          title: '我的客服',
+          icon: Icon(
+            Icons.favorite,
+            color: Colors.blue,
+            size: 30,
+          ),
+        ),
+      );
+
+    super.initState();
+  }
+
+  void openVipScreen(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (BuildContext context) {
+        return vip_screen();
+      }),
+    );
+  }
+
+  void openLoginScreen(_) {
+    Navigator.pushNamed(context, '/login_screen');
+  }
+
+  void openRegisterScreen(_) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext centext) {
+          return RegisterScreen();
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -68,7 +248,9 @@ class PagesScreenState extends State<PagesScreen> {
                     child: Text('注册'),
                     shape: StadiumBorder(),
                     padding: EdgeInsets.only(right: 10, left: 10),
-                    onPressed: () {},
+                    onPressed: () {
+                      openRegisterScreen(context);
+                    },
                   ),
                   MaterialButton(
                     color: Colors.pink[300],
@@ -79,7 +261,9 @@ class PagesScreenState extends State<PagesScreen> {
                       style: TextStyle(color: Colors.white),
                     ),
                     shape: StadiumBorder(),
-                    onPressed: () {},
+                    onPressed: () {
+                      openLoginScreen(context);
+                    },
                   ),
                 ],
               ),
@@ -99,7 +283,9 @@ class PagesScreenState extends State<PagesScreen> {
                     child: Container(
                       color: Colors.white,
                       child: MaterialButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          openVipScreen(context);
+                        },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
@@ -161,11 +347,11 @@ class PagesScreenState extends State<PagesScreen> {
 
   ListView listView() {
     return ListView(
-      children: <Widget>[item('个人中心', 8), item('我的服务', 5)],
+      children: <Widget>[item('个人中心', _listCenter), item('我的服务', _myServer)],
     );
   }
 
-  Container item(String title, int count) {
+  Container item(String title, List<PagesModel> models) {
     return Container(
       color: Colors.white,
       height: 190,
@@ -195,13 +381,14 @@ class PagesScreenState extends State<PagesScreen> {
             child: Padding(
               padding: EdgeInsets.only(top: 10),
               child: GridView.builder(
-                itemCount: count,
+                itemCount: models.length,
                 physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
-                    mainAxisSpacing: 1,
-                    crossAxisSpacing: 1,
-                    childAspectRatio: 1.8),
+                  crossAxisCount: 4,
+                  mainAxisSpacing: 0,
+                  crossAxisSpacing: 0,
+                  childAspectRatio: 1.8,
+                ),
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: EdgeInsets.all(0),
@@ -211,11 +398,8 @@ class PagesScreenState extends State<PagesScreen> {
                           onPressed: () {},
                           child: Column(
                             children: <Widget>[
-                              Icon(
-                                Icons.clear,
-                                size: 30,
-                              ),
-                              Text('离线缓存 ${index}'),
+                              models[index].icon,
+                              Text('${models[index].title}'),
                             ],
                           ),
                         ),

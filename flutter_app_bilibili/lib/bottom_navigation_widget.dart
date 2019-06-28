@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'pages/home_screen.dart';
-import 'pages/email_screen.dart';
-import 'pages/airplay_screen.dart';
-import 'pages/pages_screen.dart';
+import 'pages/HomeScreen.dart';
+import 'pages/DynamicScreen.dart';
+import 'pages/ShoppingScreen.dart';
+import 'pages/PagesScreen.dart';
+import 'pages/ChannelScreen.dart';
 
 class BottomNavigationWidget extends StatefulWidget {
   @override
@@ -22,8 +23,9 @@ class BottomNavigationWidgetState extends State<BottomNavigationWidget> {
     // TODO: implement initState
     _list
       ..add(HomeScreen())
-      ..add(EmailScreen())
-      ..add(AirplayScreen())
+      ..add(ChannelScreen())
+      ..add(DynamicScreen())
+      ..add(ShoppingScreen())
       ..add(PagesScreen());
     super.initState();
   }
@@ -36,44 +38,62 @@ class BottomNavigationWidgetState extends State<BottomNavigationWidget> {
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                color: _bottomNavigationColor,
-              ),
-              title: Text(
-                'Home',
-                style: TextStyle(color: _bottomNavigationColor),
-              )),
+            icon: Icon(
+              Icons.home,
+//                color: _bottomNavigationColor,
+            ),
+            title: Text(
+              '首页',
+//                style: TextStyle(color: _bottomNavigationColor),
+            ),
+          ),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.email,
-                color: _bottomNavigationColor,
-              ),
-              title: Text(
-                'Email',
-                style: TextStyle(color: _bottomNavigationColor),
-              )),
+            icon: Icon(
+              Icons.change_history,
+//                color: _bottomNavigationColor,
+            ),
+            title: Text(
+              '频道',
+//                style: TextStyle(color: _bottomNavigationColor),
+            ),
+          ),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.airplay,
-                color: _bottomNavigationColor,
-              ),
-              title: Text(
-                'Airplay',
-                style: TextStyle(color: _bottomNavigationColor),
-              )),
+            icon: Icon(
+              Icons.airplanemode_active,
+//                color: _bottomNavigationColor,
+            ),
+            title: Text(
+              '动态',
+//                style: TextStyle(color: _bottomNavigationColor),
+            ),
+          ),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.pages,
-                color: _bottomNavigationColor,
-              ),
-              title: Text(
-                'Pages',
-                style: TextStyle(color: _bottomNavigationColor),
-              )),
+            icon: Icon(
+              Icons.settings_remote,
+//              color: _bottomNavigationColor,
+            ),
+            title: Text(
+              '会员购',
+//              style: TextStyle(color: _bottomNavigationColor),
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.room_service,
+//                color: _bottomNavigationColor,
+            ),
+            title: Text(
+              '我的',
+//                style: TextStyle(color: _bottomNavigationColor),
+            ),
+          ),
         ],
         currentIndex: _currentIndex,
-        type: BottomNavigationBarType.shifting,
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.redAccent,
+        unselectedItemColor: Colors.grey,
+        selectedLabelStyle: TextStyle(color: Colors.redAccent),
+        unselectedLabelStyle: TextStyle(color: Colors.grey),
         onTap: (int index) {
           setState(() {
             _currentIndex = index;

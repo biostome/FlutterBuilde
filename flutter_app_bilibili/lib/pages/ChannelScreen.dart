@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class AirplayScreen extends StatelessWidget {
+class ChannelScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text('Airplay'),
+        title: Text('频道'),
       ),
     );
   }
