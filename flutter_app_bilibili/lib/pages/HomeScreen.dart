@@ -2,7 +2,302 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:flutter_swiper/flutter_swiper.dart';
 
+class HomeScreen extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return HomeScreenState();
+  }
+}
+
+class HomeScreenState extends State<HomeScreen> {
+  List<String> _tabs = ['直播', '推荐', '热门'];
+  List<Widget> _tabBarViews = [LiveScreen(), RecommendScreen(), HotScreen()];
+  int _currentIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return DefaultTabController(
+      length: _tabs.length,
+      child: NestedScrollView(
+        headerSliverBuilder: _headerSliverBuilder,
+        body: bodyTabBarView(this._tabBarViews),
+      ),
+    );
+  }
+
+  List<Widget> _headerSliverBuilder(
+      BuildContext context, bool innerBoxIsScrolled) {
+    return <Widget>[
+      SliverAppBar(
+        automaticallyImplyLeading: true,
+        title: TextField(),
+//        flexibleSpace: FlexibleSpaceBar(
+//          centerTitle: true,
+//          background: MaterialButton(
+//            onPressed: () {},
+//            child: Text('aa'),
+//          ),
+//        ),
+        bottom: new TabBar(
+          isScrollable: true,
+          tabs: _tabs.map((choice) {
+            return new Tab(
+              text: choice,
+            );
+          }).toList(),
+        ),
+
+        actions: <Widget>[
+          new IconButton(
+            // action button
+            icon: new Icon(Icons.search),
+            onPressed: () {
+
+            },
+          ),
+        ],
+        backgroundColor: Colors.red,
+        brightness: Brightness.light,
+        iconTheme: ThemeData().primaryIconTheme,
+        textTheme: ThemeData().accentTextTheme,
+        primary: true,
+        titleSpacing: NavigationToolbar.kMiddleSpacing,
+        expandedHeight: 100,
+        floating: true,
+        pinned: true,
+        snap: true,
+      )
+    ];
+  }
+
+  /*body*/
+  TabBarView bodyTabBarView(List<Widget> tabs) {
+    return TabBarView(
+      children: tabs,
+    );
+  }
+
+  /*导航*/
+  TabBar bottomAppBar(List<String> tabs) {
+    return TabBar(
+      tabs: tabs.map(
+        (e) {
+          return Tab(
+            text: e,
+          );
+        },
+      ).toList(),
+    );
+  }
+
+  /*标题*/
+  Widget titleWidget() {
+    return Text('home');
+  }
+}
+
+class LiveScreen extends StatelessWidget {
+  List<Widget> imageList = [
+    Image.network(
+      'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2726034926,4129010873&fm=26&gp=0.jpg',
+      fit: BoxFit.fill,
+    ),
+    Image.network(
+      'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3485348007,2192172119&fm=26&gp=0.jpg',
+      fit: BoxFit.fill,
+    ),
+    Image.network(
+      'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2594792439,969125047&fm=26&gp=0.jpg',
+      fit: BoxFit.fill,
+    ),
+    Image.network(
+      'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2594792439,969125047&fm=26&gp=0.jpg',
+      fit: BoxFit.fill,
+    ),
+    Image.network(
+      'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=190488632,3936347730&fm=26&gp=0.jpg',
+      fit: BoxFit.fill,
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return ListView(
+      padding: EdgeInsets.all(10),
+      children: <Widget>[
+        Column(
+          children: <Widget>[
+            swiperView(context),
+            palaceView(context),
+            line(Colors.grey),
+            liveListHeaderView(),
+            liveListView()
+          ],
+        )
+      ],
+    );
+  }
+
+  Widget liveListView() {
+    return Container(
+      height: 1000,
+      color: Colors.grey,
+      child: GridView.builder(
+        itemCount: 10,
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.only(),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+//          childAspectRatio: 5/10,
+        ),
+        itemBuilder: (context, index) {
+          return Container(
+            color: Colors.green,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Icon(Icons.add),
+                Text('英雄联盟'),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget liveListHeaderView() {
+    return Container(
+      height: 40,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            '推荐直播',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          MaterialButton(
+            onPressed: () {
+              print('换一换');
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Text(
+                  '换一换',
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+                Icon(
+                  Icons.refresh,
+                  color: Colors.grey,
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget line(Color color) {
+    return Container(
+      margin: EdgeInsets.only(top: 0, bottom: 0),
+      color: color,
+      height: 0.5,
+    );
+  }
+
+  Widget palaceView(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: 10),
+      color: Colors.black,
+      height: 151,
+      child: GridView.builder(
+        itemCount: 10,
+        shrinkWrap: true,
+        padding: EdgeInsets.only(),
+        physics: NeverScrollableScrollPhysics(),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 5,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+//          childAspectRatio: 5/10,
+        ),
+        itemBuilder: (context, index) {
+          return Container(
+            color: Colors.green,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Icon(Icons.add),
+                Text('英雄联盟'),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget swiperView(BuildContext context) {
+    return Container(
+      height: 140,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: Swiper(
+          itemCount: 4,
+          itemBuilder: (context, index) {
+            return imageList[index];
+          },
+          pagination: SwiperPagination(
+            alignment: Alignment.bottomRight,
+            margin: const EdgeInsets.only(bottom: 5, right: 5),
+            builder: DotSwiperPaginationBuilder(
+              color: Colors.white,
+              activeColor: Colors.redAccent,
+            ),
+          ),
+          controller: SwiperController(),
+          scrollDirection: Axis.horizontal,
+          autoplay: true,
+          onTap: (index) => print('点击了第$index'),
+        ),
+      ),
+    );
+  }
+}
+
+class RecommendScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Text('推荐');
+  }
+}
+
+class HotScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Text('热门');
+  }
+}
+/*
 /// This Widget is the main application widget.
 class HomeScreen extends StatelessWidget {
   static const String _title = 'Flutter Code Sample';
@@ -11,8 +306,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: _title,
-      home:  MyFulWidget(),
-
+      home: MyFulWidget(),
     );
   }
 }
@@ -85,7 +379,9 @@ class MyFulStateWidget extends State<MyFulWidget> {
           child: TextField(
             autofocus: false,
             minLines: 1,
-            style: TextStyle(decorationColor: Colors.blue.shade100),
+            style: TextStyle(
+              decorationColor: Colors.blue.shade100,
+            ),
             decoration: InputDecoration(
               prefixIcon: Icon(Icons.search),
               fillColor: Colors.blue.shade100,
@@ -421,4 +717,4 @@ class MyFulStateWidget extends State<MyFulWidget> {
       ),
     );
   }
-}
+}*/
